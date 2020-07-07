@@ -26,7 +26,50 @@ This would mean that from the command line you would call `python3 14_cal.py 4 2
 print out a calendar for April in 2015, but if you omit either the year or both values, 
 it should use today’s date to get the month and year.
 """
+"""
+  --Assumptions:
+  - Must run program via the command line
+  - Input is optional
+  - Without input, a Calendar will print out the month and year.
+      Should use datetime to produce result
 
+  - With Month input, a Calendar will print out chosen month of current year.
+      Might extrapolate current year from datetime
+  - With 2 inputs (month, year) a calendar will print based on both inputs
+
+  --Plan:
+"""
+# Pseudocode
+# import modules to run the program
 import sys
 import calendar
 from datetime import datetime
+
+# Acquire calendar (month, year) variables
+# use datetime to acquire current date arguments (year or month)
+today = datetime.today()
+month = int(today.month)
+year = int(today.year)
+
+# check if there are no cmd line args for year and month (Will have one for file)
+if len(sys.argv) < 2:
+  automatic_cal = calendar.monthcalendar(year, month)
+  print('Current Month:', month)
+  print('Current Year:', year)
+  print(automatic_cal)
+# check if there are both cmd line args for month and year
+elif len(sys.argv) > 2:
+  chosen_month = int(sys.argv[1]) 
+  chosen_year = int(sys.argv[2])
+  my_cal = calendar.monthcalendar(chosen_year, chosen_month)
+  print('Chosen Month:', calendar.month_name[chosen_month])
+  print('Chosen Year:', chosen_year)
+  print('My Chosen Calendar:', my_cal)
+  # check if the cmd line arg for year is missing and produce calendar with chosen month and current year
+  if not sys.argv[2]:
+    my_month_cal = calendar.monthcalendar(year, chosen_month)
+    print('Current Year:', year)
+    print('Chosen Month:', calendar.month_name[chosen_month])
+    print('Selected Month Calendar:', my_month_cal)
+
+   
