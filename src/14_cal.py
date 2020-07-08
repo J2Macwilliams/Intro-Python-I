@@ -54,7 +54,7 @@ year = int(today.year)
 # check if there are no cmd line args for year and month (Will have one for file)
 if len(sys.argv) < 2:
   automatic_cal = calendar.monthcalendar(year, month)
-  print('Current Month:', month)
+  print('Current Month:', calendar.month_name[month])
   print('Current Year:', year)
   print(automatic_cal)
 # check if there are both cmd line args for month and year
