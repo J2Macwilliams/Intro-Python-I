@@ -51,25 +51,33 @@ today = datetime.today()
 month = int(today.month)
 year = int(today.year)
 
+is_running = True
+while is_running:
 # check if there are no cmd line args for year and month (Will have one for file)
-if len(sys.argv) < 2:
-  automatic_cal = calendar.monthcalendar(year, month)
-  print('Current Month:', calendar.month_name[month])
-  print('Current Year:', year)
-  print(automatic_cal)
-# check if there are both cmd line args for month and year
-elif len(sys.argv) > 2:
-  chosen_month = int(sys.argv[1]) 
-  chosen_year = int(sys.argv[2])
-  my_cal = calendar.monthcalendar(chosen_year, chosen_month)
-  print('Chosen Month:', calendar.month_name[chosen_month])
-  print('Chosen Year:', chosen_year)
-  print('My Chosen Calendar:', my_cal)
-  # check if the cmd line arg for year is missing and produce calendar with chosen month and current year
-  if not sys.argv[2]:
-    my_month_cal = calendar.monthcalendar(year, chosen_month)
+  if len(sys.argv) < 2:
+    automatic_cal = calendar.monthcalendar(year, month)
+    print('Current Month:', calendar.month_name[month])
     print('Current Year:', year)
+    print(automatic_cal)
+    print('Program expects Month and Year input')
+    is_running = False
+
+  # check if there are both cmd line args for month and year
+  elif len(sys.argv) > 2:
+    chosen_month = int(sys.argv[1]) 
+    chosen_year = int(sys.argv[2])
+    my_cal = calendar.monthcalendar(chosen_year, chosen_month)
     print('Chosen Month:', calendar.month_name[chosen_month])
-    print('Selected Month Calendar:', my_month_cal)
+    print('Chosen Year:', chosen_year)
+    print('My Chosen Calendar:', my_cal)
+    is_running = False
+    # check if the cmd line arg for year is missing and produce calendar with chosen month and current year
+    if not sys.argv[2]:
+      my_month_cal = calendar.monthcalendar(year, chosen_month)
+      print('Current Year:', year)
+      print('Chosen Month:', calendar.month_name[chosen_month])
+      print('Selected Month Calendar:', my_month_cal)
+      print('Program expects Month and Year input')
+    is_running = False
 
    
